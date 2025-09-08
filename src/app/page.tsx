@@ -2,7 +2,7 @@
 import { useState } from "react"
 import PostCard from "@/components/blog/PostCard"
 import { usePosts } from "@/hooks/usePosts"
-import Pagination from "@/components/blog/Pagination"
+import Pagination from "@/components/common/Pagination"
 import Loading from "./loading"
 
 const PAGE_SIZE = 6
