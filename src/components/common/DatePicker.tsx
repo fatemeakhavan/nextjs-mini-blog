@@ -23,7 +23,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         <Button
           variant="outline"
           data-empty={!value}
-          className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
+          className="data-[empty=true]:text-muted-foreground focus:ring-2 focus:ring-gray-400 transition-all w-full justify-start text-left font-normal"
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {value ? format(value, "PPP") : <span>Pick a date</span>}

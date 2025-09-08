@@ -15,7 +15,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   const nextDisabled = currentPage === totalPages || totalPages === 0
 
   return (
-    <nav className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-6">
+    <nav className="flex justify-center items-center gap-2 mt-6">
       <Button
         variant="outline"
         size="sm"

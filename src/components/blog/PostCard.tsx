@@ -32,10 +32,12 @@ export default function PostCard({ id, title, body, imageUrl }: PostCardProps) {
           <p className="text-gray-700  line-clamp-5 mb-2" itemProp="description">{body}</p>
           <Link
             href={`/blog/${id}`}
-            className="my-2 inline-flex items-center gap-3 font-bold text-primary hover:underline"
+            className="mt-4 inline-flex font-bold items-center gap-2 text-primary group transition-all duration-300"
           >
-            Read more
-            <ArrowRight className="w-5 h-5" />
+            <span className="-mt-1 group-hover:translate-x-1 transition-transform duration-300">
+              Read more
+            </span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
         </CardContent>
       </Card>
