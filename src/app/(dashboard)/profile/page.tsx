@@ -1,9 +1,9 @@
-import { ProfileForm } from "@/components/dashboard/ProfileForm";
+import { ProfilePage } from "@/components/dashboard/ProfilePage";
 
 export default function Profile() {
   return (
     <>
-      <ProfileForm />
+      <ProfilePage />
     </>
   );
 }
