@@ -13,12 +13,12 @@ export interface PostCardProps {
 }
 
 export default function PostCard({ id, title, body, imageUrl }: PostCardProps) {
-  const placeholder = imageUrl || `https://picsum.photos/400/200?random=${id}`
+  const placeholder = imageUrl || `${process.env.NEXT_PUBLIC_IMAGE_URL}/400/200?random=${id}`
 
   return (
-    <article className="w-full sm:w-1/2 lg:w-1/3 p-2" itemScope itemType="https://schema.org/BlogPosting">
+    <article className="w-full p-2">
       <Card className="hover:shadow-xl transition-shadow duration-300 flex flex-col h-full !py-0">
-        <div className="relative w-full h-48">
+        <Link href={`/blog/${id}`} className="relative w-full h-48">
           <Image
             src={placeholder}
             alt={title}
@@ -26,10 +26,10 @@ export default function PostCard({ id, title, body, imageUrl }: PostCardProps) {
             className="object-cover rounded-t-lg"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
-        </div>
+        </Link>
         <CardContent className="flex flex-col p-4 h-48">
-          <h2 className="text-gray-900 text-lg font-semibold mb-2" itemProp="headline">{title}</h2>
-          <p className="text-gray-700  line-clamp-5 mb-2" itemProp="description">{body}</p>
+          <h2 className="text-gray-900 text-lg font-semibold mb-2">{title}</h2>
+          <p className="text-gray-700 line-clamp-5 mb-2">{body}</p>
           <Link
             href={`/blog/${id}`}
             className="mt-4 inline-flex font-bold items-center gap-2 text-primary group transition-all duration-300"

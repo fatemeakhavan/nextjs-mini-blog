@@ -45,16 +45,16 @@ export function ProfileForm() {
       mobile: "",
       bio: "",
       favorites: [],
-      dateOfBirth: undefined,
+      dateOfBirth: '',
     },
   })
 
   const favorites = watch("favorites")
   const dateOfBirth = watch("dateOfBirth")
 
-
   useEffect(() => {
     if (profile) reset(profile)
+
   }, [profile, reset])
 
   const onSubmit = async (data: ProfileFormValues) => {
@@ -73,6 +73,7 @@ export function ProfileForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+
         <div>
           <Input
             placeholder="First Name"
@@ -83,6 +84,7 @@ export function ProfileForm() {
             <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
           )}
         </div>
+
         <div>
           <Input
             placeholder="Last Name"
@@ -93,6 +95,7 @@ export function ProfileForm() {
             <p className="text-red-500 text-xs mt-1">{errors.family.message}</p>
           )}
         </div>
+
         <div>
           <Input
             type="email"
@@ -104,6 +107,7 @@ export function ProfileForm() {
             <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
           )}
         </div>
+
         <div>
           <Input
             type="tel"
@@ -115,19 +119,24 @@ export function ProfileForm() {
             <p className="text-red-500 text-xs mt-1">{errors.mobile.message}</p>
           )}
         </div>
+
         <div>
           <DatePicker
-            value={dateOfBirth}
-            onChange={(date) =>
-              setValue("dateOfBirth", date!, { shouldValidate: true })
+            value={dateOfBirth ? new Date(dateOfBirth) : undefined}
+            onChange={(date) => {
+              const dateString = new Date(date!).toISOString()
+              setValue("dateOfBirth", dateString, { shouldValidate: true })
+            }
             }
           />
           {errors.dateOfBirth && (
             <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth.message}</p>
           )}
         </div>
+
         <div>
           <SearchableDropdown
+            className="w-full"
             options={favoriteOptions}
             value={favorites[0] || ""}
             onChange={(val) =>
@@ -139,6 +148,7 @@ export function ProfileForm() {
             <p className="text-red-500 text-xs mt-1">{errors.favorites.message}</p>
           )}
         </div>
+
         <div className="md:col-span-2">
           <Textarea
             placeholder="Bio"
@@ -160,6 +170,7 @@ export function ProfileForm() {
           {isSubmitting ? "Saving..." : "Submit Profile"}
         </Button>
       </CardFooter>
+
     </form>
   )
 }

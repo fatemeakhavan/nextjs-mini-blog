@@ -1,13 +1,13 @@
-import { ProfileFormValues } from "@/components/dashboard/ProfileForm/validation"
+import { ProfileFormValues } from "@/components/pages/dashboard/ProfileForm/validation"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
-const API_URL = "http://localhost:4000/profile"
+const PROFILE_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`
 
 export function useProfile() {
   return useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
-      const res = await fetch(API_URL)
+      const res = await fetch(PROFILE_URL)
       if (!res.ok) {
         throw new Error("Failed to fetch profile")
       }
@@ -20,7 +20,7 @@ export function useUpdateProfile() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (updatedProfile: ProfileFormValues) => {
-      const res = await fetch(API_URL, {
+      const res = await fetch(PROFILE_URL, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

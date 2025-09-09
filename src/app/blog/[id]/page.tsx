@@ -1,4 +1,4 @@
-import DetailsBlog from "@/components/blog/DetailsBlog"
+import DetailsBlog from "@/components/pages/blog/DetailsBlog"
 import { Metadata } from 'next'
 
 interface Props {
@@ -6,8 +6,10 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${params.id}`)
   const post = await res.json()
+
+  const image_url = `${process.env.NEXT_PUBLIC_IMAGE_URL}/400/200?random=${params.id}`
 
   return {
     title: `${post.title} | MiniBlog`,
@@ -15,12 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${post.title} | MiniBlog`,
       description: post.body.slice(0, 100),
-      url: `http://localhost:3000/blog/${params.id}`,
+      url: `${process.env.NEXT_PUBLIC_LOCAL_HOST}/blog/${params.id}`,
       siteName: 'MiniBlog',
       type: 'article',
       images: [
         {
-          url: '/blog-og.png',
+          url: image_url,
           width: 1200,
           height: 630,
         },
@@ -30,15 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${post.title} | MiniBlog`,
       description: post.body.slice(0, 100),
-      images: ['/blog-og.png'],
+      images: [image_url],
     },
   }
 }
 
-export default function BlogPostPage() {
-  return (
-    <>
-      <DetailsBlog />
-    </>
-  )
+export default function BlogPostPage({ params }: Props) {
+  return <DetailsBlog postId={params.id} />
 }

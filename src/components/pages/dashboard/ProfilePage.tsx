@@ -11,7 +11,7 @@ import { ProfileForm } from "./ProfileForm"
 
 export function ProfilePage() {
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center lg:mt-28">
             <Card className="w-full max-w-4xl shadow-md p-4">
                 <CardHeader className="mt-5 gap-4">
                     <CardTitle className="font-bold text-xl">Profile Form</CardTitle>

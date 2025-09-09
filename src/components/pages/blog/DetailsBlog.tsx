@@ -1,7 +1,6 @@
 "use client"
 
-import { useParams } from "next/navigation"
-import { usePosts } from "@/hooks/usePosts"
+import { useFindPostById } from "@/hooks/usePosts"
 import { Card, CardContent } from "@/components/ui/card"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -9,17 +8,19 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import Loading from "@/app/loading"
 
-export default function DetailsBlog() {
-  const { id } = useParams()
-  const { data, isLoading, error } = usePosts()
+interface IDetailsBlogProps {
+  postId: string;
+}
+
+export default function DetailsBlog({ postId }: IDetailsBlogProps) {
+
+  const { data, isLoading, error } = useFindPostById(postId as string)
 
   if (isLoading) return <Loading />
   if (error) return <p>Error: {error.message}</p>
+  if (!data) return notFound()
 
-  const post = data?.find((p) => p.id === Number(id))
-  if (!post) return notFound()
-
-  const placeholder = `https://picsum.photos/800/400?random=${id}`
+  const placeholder = `${process.env.NEXT_PUBLIC_IMAGE_URL}/800/400?random=${postId}`
 
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -34,7 +35,7 @@ export default function DetailsBlog() {
         <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-80">
           <Image
             src={placeholder}
-            alt={post.title}
+            alt={data?.title}
             fill
             className="object-cover"
             sizes="100vw"
@@ -43,10 +44,10 @@ export default function DetailsBlog() {
         </div>
         <CardContent className="p-4 sm:p-6 lg:p-10">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
-            {post.title}
+            {data?.title}
           </h1>
           <p className="text-gray-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">
-            {post.body}
+            {data?.body}
           </p>
         </CardContent>
       </Card>
