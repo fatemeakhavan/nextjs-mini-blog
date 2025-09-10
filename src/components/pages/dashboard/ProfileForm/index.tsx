@@ -80,8 +80,8 @@ export function ProfileForm() {
             {...register("name")}
             className="focus:ring-2 focus:ring-primary transition-all"
           />
-          {errors.name && (
-            <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+          {errors?.name && (
+            <p className="text-red-500 text-xs mt-1">{errors?.name?.message}</p>
           )}
         </div>
 
@@ -91,8 +91,8 @@ export function ProfileForm() {
             {...register("family")}
             className="focus:ring-2 focus:ring-primary transition-all"
           />
-          {errors.family && (
-            <p className="text-red-500 text-xs mt-1">{errors.family.message}</p>
+          {errors?.family && (
+            <p className="text-red-500 text-xs mt-1">{errors?.family?.message}</p>
           )}
         </div>
 
@@ -103,8 +103,8 @@ export function ProfileForm() {
             {...register("email")}
             className="focus:ring-2 focus:ring-primary transition-all"
           />
-          {errors.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+          {errors?.email && (
+            <p className="text-red-500 text-xs mt-1">{errors?.email?.message}</p>
           )}
         </div>
 
@@ -115,8 +115,8 @@ export function ProfileForm() {
             {...register("mobile")}
             className="focus:ring-2 focus:ring-primary transition-all"
           />
-          {errors.mobile && (
-            <p className="text-red-500 text-xs mt-1">{errors.mobile.message}</p>
+          {errors?.mobile && (
+            <p className="text-red-500 text-xs mt-1">{errors?.mobile?.message}</p>
           )}
         </div>
 
@@ -129,8 +129,8 @@ export function ProfileForm() {
             }
             }
           />
-          {errors.dateOfBirth && (
-            <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth.message}</p>
+          {errors?.dateOfBirth && (
+            <p className="text-red-500 text-xs mt-1">{errors?.dateOfBirth?.message}</p>
           )}
         </div>
 
@@ -144,8 +144,8 @@ export function ProfileForm() {
             }
             placeholder="Favorites"
           />
-          {errors.favorites && (
-            <p className="text-red-500 text-xs mt-1">{errors.favorites.message}</p>
+          {errors?.favorites && (
+            <p className="text-red-500 text-xs mt-1">{errors?.favorites?.message}</p>
           )}
         </div>
 
@@ -155,8 +155,8 @@ export function ProfileForm() {
             {...register("bio")}
             className="focus:ring-2 focus:ring-primary transition-all"
           />
-          {errors.bio && (
-            <p className="text-red-500 text-xs mt-1">{errors.bio.message}</p>
+          {errors?.bio && (
+            <p className="text-red-500 text-xs mt-1">{errors?.bio?.message}</p>
           )}
         </div>
       </CardContent>

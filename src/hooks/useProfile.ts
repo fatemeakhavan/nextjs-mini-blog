@@ -8,10 +8,10 @@ export function useProfile() {
     queryKey: ["profile"],
     queryFn: async () => {
       const res = await fetch(PROFILE_URL)
-      if (!res.ok) {
+      if (!res?.ok) {
         throw new Error("Failed to fetch profile")
       }
-      return res.json()
+      return res?.json()
     },
   })
 }
@@ -28,10 +28,10 @@ export function useUpdateProfile() {
         body: JSON.stringify(updatedProfile),
       })
 
-      if (!res.ok) {
+      if (!res?.ok) {
         throw new Error("Failed to update profile")
       }
-      return res.json()
+      return res?.json()
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profile"] })

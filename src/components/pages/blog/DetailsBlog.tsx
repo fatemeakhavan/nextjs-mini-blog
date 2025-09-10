@@ -17,7 +17,7 @@ export default function DetailsBlog({ postId }: IDetailsBlogProps) {
   const { data, isLoading, error } = useFindPostById(postId as string)
 
   if (isLoading) return <Loading />
-  if (error) return <p>Error: {error.message}</p>
+  if (error) return <p>Error: {error?.message}</p>
   if (!data) return notFound()
 
   const imageCard = `${process.env.NEXT_PUBLIC_IMAGE_URL}/800/400?random=${postId}`

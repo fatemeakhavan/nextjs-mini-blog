@@ -11,8 +11,8 @@ const POSTS_URL = `${process.env.NEXT_PUBLIC_API_URL}/posts`
 
 async function fetchPosts(): Promise<Post[]> {
     const res = await fetch(POSTS_URL)
-    if (!res.ok) throw new Error("Failed to fetch posts")
-    return res.json()
+    if (!res?.ok) throw new Error("Failed to fetch posts")
+    return res?.json()
 }
 
 export function usePosts() {
@@ -24,8 +24,8 @@ export function usePosts() {
 
 async function fetchPostById(postId: string): Promise<Post> {
     const res = await fetch(`${POSTS_URL}/${postId}`)
-    if (!res.ok) throw new Error("Failed to fetch post")
-    return res.json()
+    if (!res?.ok) throw new Error("Failed to fetch post")
+    return res?.json()
 }
 
 export function useFindPostById(postId: string) {
