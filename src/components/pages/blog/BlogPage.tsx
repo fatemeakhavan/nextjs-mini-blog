@@ -24,7 +24,7 @@ export default function BlogPage() {
 
     return (
         <section className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Blog Posts</h1>
+            <h1 className="text-2xl font-bold mb-4 ml-3">Blog Posts</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {paginatedPosts.map((post) => (
                     <PostCard key={post.id} id={post.id} title={post.title} body={post.body} />

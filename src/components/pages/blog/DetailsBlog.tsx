@@ -20,7 +20,7 @@ export default function DetailsBlog({ postId }: IDetailsBlogProps) {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return notFound()
 
-  const placeholder = `${process.env.NEXT_PUBLIC_IMAGE_URL}/800/400?random=${postId}`
+  const imageCard = `${process.env.NEXT_PUBLIC_IMAGE_URL}/800/400?random=${postId}`
 
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -34,11 +34,13 @@ export default function DetailsBlog({ postId }: IDetailsBlogProps) {
       <Card className="overflow-hidden shadow-lg rounded-2xl !py-0">
         <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-80">
           <Image
-            src={placeholder}
+            src={imageCard}
             alt={data?.title}
             fill
             className="object-cover"
             sizes="100vw"
+            placeholder="blur"
+            blurDataURL="/placeholder.png"
             priority
           />
         </div>

@@ -16,9 +16,10 @@ export function ProfilePage() {
                 <CardHeader className="mt-5 gap-4">
                     <CardTitle className="font-bold text-xl">Profile Form</CardTitle>
                     <CardDescription className="text-lg">
-                        Fill in your details and preferences below.
+                       Please complete your profile.
                     </CardDescription>
                 </CardHeader>
+                
                 <ProfileForm />
             </Card>
         </div>

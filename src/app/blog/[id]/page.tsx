@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image_url = `${process.env.NEXT_PUBLIC_IMAGE_URL}/400/200?random=${params.id}`
 
   return {
-    title: `${post.title} | MiniBlog`,
+    title: 'MiniBlog | DetailsBlog',
     description: post.body.slice(0, 100),
     openGraph: {
       title: `${post.title} | MiniBlog`,
