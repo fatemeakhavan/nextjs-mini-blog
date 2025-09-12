@@ -17,10 +17,16 @@ Built using **Next.js App Router, TypeScript, Tailwind, React Query, React Hook 
 
 ## Rendering and Caching Choices
 
-I used **Client-Side Rendering (CSR)** to fetch data dynamically from the API.  
-Data fetching and caching are handled with **React Query** and custom hooks, which manage loading, error states, and background refetching.
+- **HomePage & Blog Pages (`/blog/[id]`)**  
+  Use **SSG** with **React Query + HydrationBoundary** for server-fetched data.  
+  - Pre-rendered HTML → **better SEO**  
+  - Client-side **loading, error, and refetch** managed by React Query  
 
----
+- **Dashboard Pages**  
+  Use **CSR** with **React Query** for dynamic, interactive data.  
+  - Efficient client-side **caching, loading, error, and refetch**
+
+----
 
 If I had more time, I would focus on improving the UI/UX.
 This includes creating a more polished design, enhancing responsiveness across devices, and improving accessibility to provide a smoother and more user-friendly experience.

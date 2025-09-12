@@ -1,4 +1,6 @@
 import DetailsBlog from "@/components/pages/blog/DetailsBlog"
+import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import { getPostDetails } from "@/services/posts"
 import { Metadata } from 'next'
 
 interface Props {
@@ -6,10 +8,9 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${params?.id}`)
-  const post = await res.json()
-
-  const image_url = `${process.env.NEXT_PUBLIC_IMAGE_URL}/400/200?random=${params?.id}`
+  const {id} = await params
+  const image_url = `${process.env.NEXT_PUBLIC_IMAGE_URL}/400/200?random=${id}`
+  const post = await getPostDetails(id);
 
   return {
     title: 'MiniBlog | DetailsBlog',
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${post?.title} | MiniBlog`,
       description: post?.body?.slice(0, 100),
-      url: `${process.env.NEXT_PUBLIC_LOCAL_HOST}/blog/${params?.id}`,
+      url: `${process.env.NEXT_PUBLIC_LOCAL_HOST}/blog/${id}`,
       siteName: 'MiniBlog',
       type: 'article',
       images: [
@@ -37,6 +38,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function BlogPostPage({ params }: Props) {
-  return <DetailsBlog postId={params?.id} />
+export default async function BlogPostPage({ params }: Props) {
+  const {id} = await params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["post"],
+    queryFn: () => getPostDetails(id),
+  });
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <DetailsBlog postId={id} />
+    </HydrationBoundary>
+  )
 }

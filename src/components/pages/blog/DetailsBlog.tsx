@@ -1,12 +1,13 @@
 "use client"
 
-import { useFindPostById } from "@/hooks/usePosts"
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import Loading from "@/app/loading"
+import { getPostDetails } from "@/services/posts";
 
 interface IDetailsBlogProps {
   postId: string;
@@ -14,7 +15,10 @@ interface IDetailsBlogProps {
 
 export default function DetailsBlog({ postId }: IDetailsBlogProps) {
 
-  const { data, isLoading, error } = useFindPostById(postId as string)
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["post"],
+    queryFn: () => getPostDetails(postId),
+  });
 
   if (isLoading) return <Loading />
   if (error) return <p>Error: {error?.message}</p>

@@ -1,4 +1,6 @@
 import BlogPage from "@/components/pages/blog/BlogPage"
+import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import { getPosts } from "@/services/posts";
 import type { Metadata } from 'next'
 
 const image_url = `${process.env.NEXT_PUBLIC_IMAGE_URL}/800/400?random=1`
@@ -28,6 +30,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
-  return <BlogPage />
+export default async function HomePage() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+  });
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <BlogPage />
+    </HydrationBoundary>
+  )
 }
